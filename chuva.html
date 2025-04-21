@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Chuva de Corações com Texto</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: lightpink;
+      overflow: hidden;
+      font-family: 'Arial', sans-serif;
+      position: relative;
+      height: 100vh;
+    }
+
+    .heart {
+      position: absolute;
+      top: -50px;
+      width: 30px;
+      height: 30px;
+      background-color: darkred;
+      transform: rotate(45deg);
+      animation: fall 8s linear infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background-color: darkred;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -15px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -15px;
+      top: 0;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(150vh) rotate(500deg);
+        opacity: 0;
+      }
+    }
+
+    /* Texto central */
+    .texto-central {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: #8b5cf6;
+      font-size: 32px;
+      font-weight: bold;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    /* Centralizando os botões */
+    .botoes {
+      position: absolute;
+      top: 65%;
+      left: 50%;
+      transform: translateX(-50%);  /* Centraliza horizontalmente */
+      display: flex;
+      gap: 20px; /* Distância entre os botões */
+    }
+
+    .botao {
+      padding: 10px 20px;
+      font-size: 16px;
+      background: linear-gradient(45deg, #f472b6, #c084fc);
+      border: none;
+      border-radius: 10px;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .botao:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px #f472b6;
+    }
+
+    /* Estilos para o botão "fugir" após o clique */
+    #fujao {
+      position: relative; /* Alinha o botão dentro do container flex */
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Música de fundo -->
+  <iframe src="https://open.spotify.com/embed/track/5WDLRQ3VCdVrKw0njWe5E5?si=KvvnBqWMQLCVOoQdH5nkmQ" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+
+  <!-- Texto no centro -->
+  <div class="texto-central">
+      Quer dormir comigo hoje?<br>
+  </div>
+
+  <div class="botoes">
+    <a href="https://wa.me/5511951041431?text=pode%20pedir%20meu uber %20Jubinha" target="_blank">
+      <button class="botao">SIM</button>
+    </a>
+    <button class="botao" id="fujao">NÃO</button>
+  </div>
+
+  <!-- Corações gerados dinamicamente -->
+  <script>
+    for (let i = 0; i < 50; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (5 + Math.random() * 5) + 's';
+      heart.style.opacity = Math.random();
+      document.body.appendChild(heart);
+    }
+
+    // Função para fazer o botão "fugir" mudar de lugar instantaneamente
+    document.getElementById('fujao').addEventListener('click', function() {
+      const x = Math.random() * 100 - 50; // Aleatório entre -50% e 50%
+      const y = Math.random() * 100 - 50; // Aleatório entre -50% e 50%
+      this.style.transform = `translate(${x}vw, ${y}vh)`; // Muda de posição
+    });
+  </script>
+
+</body>
+</html>
+
